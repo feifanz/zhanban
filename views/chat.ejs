@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title id="yonghu"><%=yonghuming%></title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/jumbotron.css" rel="stylesheet">
+	<style type="text/css">
+		.caozuo{
+			position: fixed;
+			bottom: 20px;
+			left: 0;
+			
+		}
+		
+	</style>
+	<script src="/js/jquery-1.11.3.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/underscore-noflect.js"></script>
+    
+</head>
+
+<body>
+	  
+	<div>
+		<ul class="liebiao">
+			
+		</ul>
+	</div>
+	<div class="container">
+	<div class="row clearfix" id="zhanban">
+		
+	</div>
+	</div>
+	
+	<div class="caozuo">
+		<div class="col-lg-6" >
+    	<div class="input-group">
+      		<input type="text" class="form-control" id="neirong" placeholder="说点什么.....">
+     		<span class="input-group-btn">
+        		<button class="btn btn-default" type="button" id="anniu">发言!</button>
+      		</span>
+    	</div>
+  	</div>
+	</div>
+	
+	<!--列表模板-->
+	<script type="text/template" id="moban">
+  	  <div class="col-md-12 column">
+	      <div class="media well">
+	         <a href="#" class="pull-left">
+	         <img src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/64/64/default.jpg" class="media-object" alt='' />
+	         </a>
+	        <div class="media-body">
+	          <h4 class="media-heading">
+	            {{=ren}}
+	          </h4> 
+	          {{=neirong}}
+	        </div>
+	      </div>
+	  </div>
+	</script>
+
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		var number = 0; 
+		var $zhanban = $("#zhanban");
+		var compiled = _.template($("#moban").html());
+		var socket = io();
+		$("#anniu").click(function(e){
+				//把文本框的内容上传：
+				socket.emit("liaotian",{
+					"neirong" : $("#neirong").val(),
+					"ren" : $("#yonghu").html()
+				});
+				$(this).val("");
+			
+		});
+
+		socket.on("liaotian",function(msg){
+			//$(".liebiao").prepend("<li><b>" + msg.ren + "：</b>"+ msg.neirong + "</li>");
+			if(number == 4){  //展板已满，清空后再上传信息
+				$("#zhanban").html("");
+				number = 0;
+			}
+			var htmlstring = compiled(msg);
+			$("#zhanban").prepend($(htmlstring));
+			number = number + 1;
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "zhanban",
+  "version": "1.0.0",
+  "description": "show messages on big screen",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^2.3.4",
+    "express-session": "^1.11.3",
+    "express": "^4.13.3",
+    "socket.io": "^1.3.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
