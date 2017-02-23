@@ -23,9 +23,21 @@ var alluser = [];
 app.get("/",function(req,res,next){
 	res.render("index");
 });
+
+app.get("/login",function(req,res,next){
+	res.render("login");
+});
+
+
+
+
 //确认登陆，检查此人是否有用户名，并且昵称不能重复
 app.get("/check",function(req,res,next){
 	var yonghuming = req.query.yonghuming;
+	var avatar = req.query.avatar;
+	if(req.session.yonghuming){
+		res.redirect("/chat");
+	}
 	if(!yonghuming){
 		res.send("必须填写用户名");
 		return;
@@ -37,8 +49,10 @@ app.get("/check",function(req,res,next){
 	alluser.push(yonghuming);
 	//付给session
 	req.session.yonghuming = yonghuming;
+	req.session.avatar = avatar;
 	res.redirect("/chat");
 });
+
 //聊天室
 app.get("/chat",function(req,res,next){
 	//这个页面必须保证有用户名了，
@@ -47,7 +61,8 @@ app.get("/chat",function(req,res,next){
 		return;
 	}
 	res.render("chat",{
-		"yonghuming" : req.session.yonghuming
+		"yonghuming" : req.session.yonghuming,
+		"avatar" : req.session.avatar
 	});
 })
 
