@@ -56,7 +56,7 @@
 	         </a>
 	        <div class="media-body">
 	          <h4 class="media-heading">
-	            {{=ren}}
+	             第{{=number}}条发言 : {{=ren}}
 	          </h4> 
 	          {{=neirong}}
 	        </div>
@@ -74,7 +74,8 @@
 				//把文本框的内容上传：
 				socket.emit("liaotian",{
 					"neirong" : $("#neirong").val(),
-					"ren" : $("#yonghu").html()
+					"ren" : $("#yonghu").html(),
+					"number": number + 1
 				});
 				$(this).val("");
 			
@@ -82,9 +83,8 @@
 
 		socket.on("liaotian",function(msg){
 			//$(".liebiao").prepend("<li><b>" + msg.ren + "：</b>"+ msg.neirong + "</li>");
-			if(number == 4){  //展板已满，清空后再上传信息
+			if(number%3 == 0){  //展板已满，清空后再上传信息
 				$("#zhanban").html("");
-				number = 0;
 			}
 			var htmlstring = compiled(msg);
 			$("#zhanban").prepend($(htmlstring));
