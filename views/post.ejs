@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>
+        post
+    </title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/jumbotron.css" rel="stylesheet">
+    <script src="/js/jquery-1.11.3.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/underscore-noflect.js"></script>
+    <style type="text/css">
+        /*font Awesome http://fontawesome.io*/
+    
+    @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+    /*Comment List styles*/
+    
+    body {
+        background: url("/avatars/backgroud.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    
+    .comment-list .row {
+        margin-bottom: 0px;
+    }
+    
+    .comment-list .panel .panel-heading {
+        padding: 4px 15px;
+        position: absolute;
+        border: none;
+        /*Panel-heading border radius*/
+        border-top-right-radius: 0px;
+        top: 1px;
+    }
+    
+    .comment-list .panel .panel-heading.right {
+        border-right-width: 0px;
+        /*Panel-heading border radius*/
+        border-top-left-radius: 0px;
+        right: 16px;
+    }
+    
+    .comment-list .panel .panel-heading .panel-body {
+        padding-top: 6px;
+    }
+    
+    .comment-list figcaption {
+        /*For wrapping text in thumbnail*/
+        word-wrap: break-word;
+    }
+    /* Portrait tablets and medium desktops */
+    
+    @media (min-width: 768px) {
+        .comment-list .arrow:after,
+        .comment-list .arrow:before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-color: transparent;
+        }
+        .comment-list .panel.arrow.left:after,
+        .comment-list .panel.arrow.left:before {
+            border-left: 0;
+        }
+        /*****Left Arrow*****/
+        /*Outline effect style*/
+        .comment-list .panel.arrow.left:before {
+            left: 0px;
+            top: 30px;
+            /*Use boarder color of panel*/
+            border-right-color: inherit;
+            border-width: 16px;
+        }
+        /*Background color effect*/
+        .comment-list .panel.arrow.left:after {
+            left: 1px;
+            top: 31px;
+            /*Change for different outline color*/
+            border-right-color: #FFFFFF;
+            border-width: 15px;
+        }
+        /**word**/
+        .comment-list .comment-post,
+        .comment-date,
+        .comment-user {
+            font-size: 20px;
+            color: white;
+            margin-top: 6px;
+        }
+        /** comment background**/
+        .comment-list .panel-body {
+            background: #4ADFCC;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <section class="comment-list">
+                    <!-- First Comment -->
+                    <article class="row">
+                        <div class="col-md-2 col-sm-2 hidden-xs">
+                            <figure class="thumbnail">
+                                <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
+                                <figcaption class="text-center"></figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-md-10 col-sm-10">
+                            <div class="panel panel-default arrow left">
+                                <div class="panel-body">
+                                    <header class="text-left">
+                                        <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
+                                        <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
+                                    </header>
+                                    <div class="comment-post">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="row">
+                        <div class="col-md-2 col-sm-2 hidden-xs">
+                            <figure class="thumbnail">
+                                <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
+                                <figcaption class="text-center"></figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-md-10 col-sm-10">
+                            <div class="panel panel-default arrow left">
+                                <div class="panel-body">
+                                    <header class="text-left">
+                                        <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
+                                        <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
+                                    </header>
+                                    <div class="comment-post">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="row">
+                        <div class="col-md-2 col-sm-2 hidden-xs">
+                            <figure class="thumbnail">
+                                <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
+                                <figcaption class="text-center"></figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-md-10 col-sm-10">
+                            <div class="panel panel-default arrow left">
+                                <div class="panel-body">
+                                    <header class="text-left">
+                                        <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
+                                        <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
+                                    </header>
+                                    <div class="comment-post">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
