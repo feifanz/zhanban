@@ -186,6 +186,8 @@
     //发言计时
     var c = 0;
     var number = 0;
+    var dueDate;
+    var realDate;
     var $zhanban = $("#zhanban");
     var compiled = _.template($("#moban").html());
     var gcompiled = _.template($("#gmoban").html());
@@ -195,6 +197,7 @@
         console.log(c);
         if (c <= 0) {
             c = 0;
+            return;
         } else {
             c = c - 1;
         }
@@ -206,8 +209,10 @@
 
 
     $("#anniu").click(function(e) {
-        if (c != 0) {
-            alert("请等待" + c + "秒后发言~~");
+        realDate = new Date();
+        if (dueDate >= realDate) {
+            console.log(parseInt((dueDate-realDate)/1000));
+            alert("请等待" + parseInt((dueDate-realDate)/1000) + "秒后发言~~");
         } else {
             //把文本框的内容上传：
             socket.emit("liaotian", {
@@ -216,8 +221,9 @@
                 "number": number + 1
             });
             $(this).val("");
-            c = 10; //等待10秒后发言
-            timedCount();
+            dueDate = new Date();
+            dueDate.setSeconds(dueDate.getSeconds() + 10);
+
         }
 
 

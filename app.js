@@ -17,6 +17,7 @@ app.set("view engine", "ejs");
 app.use(express.static("./public"));
 
 var alluser = [];
+var textNumber = 1;
 
 //中间件
 //显示首页
@@ -112,21 +113,25 @@ app.get("/check", function(req, res, next) {
 //聊天室
 app.get("/chat", function(req, res, next) {
     //这个页面必须保证有用户名了，
-
     if (!req.session.yonghuming) {
         res.redirect("/");
         return;
     }
     res.render("chat", {
         "yonghuming": req.session.yonghuming,
-        "avatar": req.session.avatar
+        "avatar": req.session.avatar,
     });
 })
 
 io.on("connection", function(socket) {
     socket.on("liaotian", function(msg) {
         //把接收到的msg原样广播, 1000ms延迟
-        setTimeout(function() { io.emit("liaotian", msg); }, 1000);
+        console.log(textNumber);
+        msg.number = textNumber;
+        setTimeout(function() {
+            textNumber = textNumber +1;
+            io.emit("liaotian", msg);
+        }, 1000);
 
     });
 });
