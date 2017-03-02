@@ -40,34 +40,73 @@ app.get("/check", function(req, res, next) {
 
     var yonghuming = req.query.yonghuming;
     var avatar = req.query.avatar;
-
-    console.log(req.session.denglu);
+    var mima = req.query.mima;
+    //console.log(req.session.denglu);
 
     if(req.session.denglu == 1){
         res.send("您已经登陆了~~");
         return;
     }
 
-    if (req.session.yonghuming == yonghuming) {
+    /*if (req.session.yonghuming == yonghuming) {
         req.session.avatar = avatar;
         req.session.denglu = 1;
         res.redirect("/chat");
         return;
-    }
+    }*/
 
-    if (alluser.indexOf(yonghuming) != -1) {
+    /*if (alluser.indexOf(yonghuming) != -1) {
         res.send("用户名已经被占用~~ 请你换个名字~~");
         return;
+    }*/
+
+    function checkUser(user){
+        for(var i = 0; i<alluser.length;i++){
+            if(user.yonghuming==alluser[i].yonghuming&&user.mima==alluser[i].mima){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    }
+
+    function checkUsername(user) {
+        for(var i = 0; i<alluser.length;i++){
+            if(user.yonghuming==alluser[i].yonghuming){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    }
+
+    var user = {
+        "yonghuming" : yonghuming,
+        "mima" : mima
+    }
+
+    if(checkUser(user)){
+        //旧用户登录，用户名密码正确
+        req.session.yonghuming = yonghuming;
+        req.session.avatar = avatar;
+        req.session.denglu = 1;
+        res.redirect("/chat");
+    }else if(checkUsername(user)){
+        res.send("旧用户密码错误，或者新用户用户名已经被注册");
+    }else{                  //新用户登录，并且用户名不重复
+
+        alluser.push(user);
+        //付给session
+        req.session.yonghuming = yonghuming;
+        req.session.avatar = avatar;
+        req.session.denglu = 1;
+        res.redirect("/chat");
     }
 
 
 
-    alluser.push(yonghuming);
-    //付给session
-    req.session.yonghuming = yonghuming;
-    req.session.avatar = avatar;
-    req.session.denglu = 1;
-    res.redirect("/chat");
 });
 
 //聊天室
@@ -94,6 +133,7 @@ io.on("connection", function(socket) {
 
 app.get("/logout", function(req, res, next) {
     req.session.denglu = req.query.denglu;
+
     res.send("logout");
 });
 
