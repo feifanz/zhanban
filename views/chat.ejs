@@ -231,7 +231,7 @@
 
     socket.on("liaotian", function(msg) {
         //$(".liebiao").prepend("<li><b>" + msg.ren + "：</b>"+ msg.neirong + "</li>");
-
+        console.log(number);
         if (number ==3  ) { //展板已满，清空后再上传信息
 
             setTimeout(function () {
@@ -246,7 +246,7 @@
                     var htmlstring = compiled(msg);
                     $("#zhanban").prepend($(htmlstring));
                 }
-                number = 0;
+                number = 1;
             }, 3000);
 
         }else{
