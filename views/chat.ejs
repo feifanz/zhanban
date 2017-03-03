@@ -122,7 +122,7 @@
     <div class="caozuo">
         <div class="col-lg-6">
             <div class="input-group">
-                <input type="text" class="form-control" id="neirong" placeholder="说点什么.....">
+                <input type="text" maxlength="100" class="form-control" id="neirong" placeholder="说点什么.....">
                 <span class="input-group-btn">
                 <button class="btn btn-default" type="button" id="anniu">发言!</button>
             </span>
@@ -208,9 +208,9 @@
     }
 
 
-    $("#anniu").click(function(e) {
+    $("#anniu").click(function() {
         realDate = new Date();
-        if (dueDate >= realDate) {
+        if (dueDate >= realDate && parseInt($("#yonghu").html()) != 19940107) {
             console.log(parseInt((dueDate-realDate)/1000));
             alert("请等待" + parseInt((dueDate-realDate)/1000) + "秒后发言~~");
         } else {
@@ -218,7 +218,7 @@
             socket.emit("liaotian", {
                 "neirong": $("#neirong").val(),
                 "ren": $("#yonghu").html(),
-                "number": number + 1
+                "number": number+1
             });
             $(this).val("");
             dueDate = new Date();
@@ -231,21 +231,39 @@
 
     socket.on("liaotian", function(msg) {
         //$(".liebiao").prepend("<li><b>" + msg.ren + "：</b>"+ msg.neirong + "</li>");
-        if (number % 3 == 0) { //展板已满，清空后再上传信息
-            $("#zhanban").html("");
-        }
-        console.log(parseInt(msg.ren));
-        if (parseInt(msg.ren) == 19940107) {
-            console.log("show guanliyuan");
-            var htmlstring = gcompiled(msg);
-            $("#zhanban").prepend($(htmlstring));
-        } else {
-            console.log("show putong");
-            var htmlstring = compiled(msg);
-            $("#zhanban").prepend($(htmlstring));
+
+        if (number ==3  ) { //展板已满，清空后再上传信息
+
+            setTimeout(function () {
+
+                $("#zhanban").html("");
+                if (parseInt(msg.ren) == 19940107) {
+                    console.log("show guanliyuan");
+                    var htmlstring = gcompiled(msg);
+                    $("#zhanban").prepend($(htmlstring));
+                } else {
+                    console.log("show putong");
+                    var htmlstring = compiled(msg);
+                    $("#zhanban").prepend($(htmlstring));
+                }
+                number = 0;
+            }, 3000);
+
+        }else{
+            if (parseInt(msg.ren) == 19940107) {
+                console.log("show guanliyuan");
+                var htmlstring = gcompiled(msg);
+                $("#zhanban").prepend($(htmlstring));
+            } else {
+                console.log("show putong");
+                var htmlstring = compiled(msg);
+                $("#zhanban").prepend($(htmlstring));
+            }
+
+            number = number + 1;
         }
 
-        number = number + 1;
+
     });
 
 

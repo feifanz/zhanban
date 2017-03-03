@@ -46,3 +46,5 @@ t.setSeconds(t.getSeconds() + 30);
 console.log(date1);
 console.log(t);
 console.log(t-date1);
+var a = "你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你你好你好你好你好你你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好好你好你好你好你好你好你好你好你好你好你好你好你好";
+console.log(a.length);
