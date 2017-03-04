@@ -83,12 +83,18 @@
             border-width: 15px;
         }
         /**word**/
-        .comment-list .comment-post,
-        .comment-date ,
-        .comment-user {
-            font-size: 15px;
+        .comment-list .comment-post
+        {
+            font-size: 13px;
             color: white;
             margin-top: 6px;
+        }
+
+        .comment-date ,
+        .comment-user {
+            font-size: 10px;
+            color: white;
+
         }
         /** comment background**/
         #admin {
@@ -134,7 +140,7 @@
         <article class="row">
             <div class="col-md-2 col-sm-2 hidden-xs">
                 <figure class="thumbnail">
-                    <img class="img-responsive" src="avatars/<%=avatar%>" />
+                    <img class="img-responsive" width="70px" height="70px" src="avatars/<%=avatar%>" />
                     <figcaption class="text-center"></figcaption>
                 </figure>
             </div>
@@ -142,8 +148,8 @@
                 <div class="panel panel-default arrow left">
                     <div class="panel-body" id="putong">
                         <header class="text-left">
-                            <div class="comment-user"><i class="fa fa-user"></i>{{=ren}} </div>
-                            <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> No.{{=number}}</time>
+                            <div class="comment-user"><i class="fa fa-user"></i>{{=ren}} <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> No.{{=number}}</time> </div>
+
                         </header>
                         <div class="comment-post" >
                             <p>
@@ -160,7 +166,7 @@
         <article class="row">
             <div class="col-md-2 col-sm-2 hidden-xs">
                 <figure class="thumbnail">
-                    <img class="img-responsive" src="avatars/<%=avatar%>" />
+                    <img class="img-responsive" width="70px" height="70px" src="avatars/<%=avatar%>" />
                     <figcaption class="text-center"></figcaption>
                 </figure>
             </div>
@@ -168,8 +174,8 @@
                 <div class="panel panel-default arrow left">
                     <div class="panel-body" id=admin>
                         <header class="text-left">
-                            <div class="comment-user"><i class="fa fa-user"></i> Administrator</div>
-                            <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> No.{{=number}}</time>
+                            <div class="comment-user"><i class="fa fa-user"></i> Administrator <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> No.{{=number}}</time></div>
+
                         </header>
                         <div class="comment-post">
                             <p>
@@ -232,7 +238,7 @@
     socket.on("liaotian", function(msg) {
         //$(".liebiao").prepend("<li><b>" + msg.ren + "：</b>"+ msg.neirong + "</li>");
         console.log(number);
-        if (number ==3  ) { //展板已满，清空后再上传信息
+        if (number ==5  ) { //展板已满，清空后再上传信息
 
             setTimeout(function () {
 

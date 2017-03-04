@@ -16,7 +16,13 @@ app.set("view engine", "ejs");
 //静态服务
 app.use(express.static("./public"));
 
+var allText = [];
 var alluser = [];
+alluser.push({
+    "yonghuming" : "19940107",
+    "mima" : "1994Zhang"
+
+});
 var textNumber = 1;
 
 //中间件
@@ -26,7 +32,11 @@ app.get("/", function(req, res, next) {
 });
 
 app.get("/post", function(req, res, next) {
-    res.render("post");
+    console.log(allText);
+    res.render("post", {
+        "allText": allText
+
+    });
 });
 
 app.get("/login", function(req, res, next) {
@@ -39,6 +49,10 @@ app.get("/login", function(req, res, next) {
 //确认登陆，检查此人是否有用户名，并且昵称不能重复
 app.get("/check", function(req, res, next) {
 
+    for(var j = 0 ; j<alluser.length ; j++){
+        console.log(alluser[j]);
+
+    }
     var yonghuming = req.query.yonghuming;
     var avatar = req.query.avatar;
     var mima = req.query.mima;
@@ -77,18 +91,17 @@ app.get("/check", function(req, res, next) {
             if(user.yonghuming==alluser[i].yonghuming){
                 return true;
             }
-            else{
-                return false;
-            }
         }
+        return false;
     }
 
     var user = {
         "yonghuming" : yonghuming,
         "mima" : mima
+
     }
 
-    if(checkUser(user)){
+    if(checkUser(user) ){
         //旧用户登录，用户名密码正确
         req.session.yonghuming = yonghuming;
         req.session.avatar = avatar;
@@ -119,7 +132,7 @@ app.get("/chat", function(req, res, next) {
     }
     res.render("chat", {
         "yonghuming": req.session.yonghuming,
-        "avatar": req.session.avatar,
+        "avatar": req.session.avatar
     });
 })
 
@@ -131,6 +144,7 @@ io.on("connection", function(socket) {
         setTimeout(function() {
             textNumber = textNumber +1;
             io.emit("liaotian", msg);
+            allText.push(msg);
         }, 1000);
 
     });
