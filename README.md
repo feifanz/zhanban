@@ -1,3 +1,5 @@
+Small chatroom project build by using express framework
+
 How to run this app:
 
 1. cd zhanban
